@@ -18,6 +18,7 @@ int** copie_tableau(int **T){
     return tab;
 }
 
+
 void afficher_tableau(int** T){
     printf("\n");
     for (int i=0; i<=8; i++){
@@ -99,19 +100,23 @@ int valide(int** T, int i, int j, int x){
 }
 
 
-int valide_tableau(int** T){
+int valide_tableau(int** T, int** T_eff, int* x0, int* y0){
 
     int c;
     int v;
 
     for (int i=0; i<9; i++){
         for (int j=0; j<9; j++){
-            c = T[i][j];
-            T[i][j] = 0;
-            v = valide(T,i,j,c);
-            T[i][j] = c;
-            if (v==0){
-                return 0;
+            if (T_eff[i][j]==0){
+                c = T[i][j];
+                T[i][j] = 0;
+                v = valide(T,i,j,c);
+                T[i][j] = c;
+                if (v==0){
+                    *x0 = i;
+                    *y0 = j;
+                    return 0;
+                }
             }
         }
     }
@@ -191,7 +196,7 @@ int main () {
     afficher_tableau(tab);
     
 
-/*
+
     int K = 2;
 
     efface(tab,K);
@@ -237,32 +242,37 @@ int main () {
     int valide = 0;
     
     while (valide==0){
+        
+        int verif;
         printf("Voulez-vous vérifier si le sudoku est valide ? \n1 pour Oui \n0 pour Non \n");
-        scanf("%d", &B);
+        scanf("%d", &verif);
 
-        if (B==1){
-            valide = valide_tableau()
+        if (verif==1){
+            int x0;
+            int y0;
+            valide = valide_tableau(tab,tab_efface,&x0,&y0);
+
+            if (valide==0){
+                printf("Le sudoku n'est pas valide, la case (%d,%d) n'est pas correcte.\n", x0, y0);
+            }
         }
 
+        else{
+            printf("Entrez les coordonnées et la valeur à modifier: ligne,colonne,valeur\n");
+            scanf("%d,%d,%d", &x , &y, &v);
 
-
-
-
-
-
+            if ( (v<=0) || (v>9) || (tab_efface[x][y]!=0) ){
+                printf("Saisie invalide\n\n");
+            }
+            else{
+                tab[x][y] = v;
+                afficher_tableau(tab);
+            }
+        }
     }
 
+    printf("Bravo, vous avez terminé le sudoku.\n");
 
-    
-
-
-    
-*/
-    
-    
-    
-    
-    
     free(tab);
-    //free(tab_efface);
+    free(tab_efface);
 }
