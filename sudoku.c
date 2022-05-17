@@ -3,13 +3,30 @@
 #include <time.h>
 
 
+int** copie_tableau(int **T){
+    
+    int** tab;
+    tab = calloc(9, sizeof(int*));
+    for(int i = 0;i<9;i++) {
+        tab[i] = calloc(9, sizeof(int));
+    }
+    for (int i=0; i<9; i++){
+        for (int j=0; j<9; j++){
+            tab[i][j] = T[i][j];
+        }
+    }
+    return tab;
+}
+
 void afficher_tableau(int** T){
+    printf("\n");
     for (int i=0; i<=8; i++){
         for (int j=0; j<=8; j++){
             printf("%d ", T[i][j]);
         }
         printf("\n");
     }
+    printf("\n");
 }
 
 
@@ -38,7 +55,7 @@ void remplir_diag (int** T){
 
 
 int valide(int** T, int i, int j, int x){
-
+    
     int k = 0;
 
     while ((k<9) && (T[i][k] != x))
@@ -82,6 +99,26 @@ int valide(int** T, int i, int j, int x){
 }
 
 
+int valide_tableau(int** T){
+
+    int c;
+    int v;
+
+    for (int i=0; i<9; i++){
+        for (int j=0; j<9; j++){
+            c = T[i][j];
+            T[i][j] = 0;
+            v = valide(T,i,j,c);
+            T[i][j] = c;
+            if (v==0){
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+
 int remplir_autres(int** T, int lig, int col)
 {
     int N = 9;
@@ -116,7 +153,23 @@ int remplir_autres(int** T, int lig, int col)
     return 0;
 }
 
-//void efface(int** T)
+
+void efface(int** T, int K){
+    
+    int k = 0;
+
+    while (k<K){
+
+        int i = rand()%9;
+        int j = rand()%9;
+
+        if (T[i][j]>0){
+            T[i][j] = 0;
+            k++;
+        }
+    }
+}
+
 
 
 int main () {
@@ -136,20 +189,80 @@ int main () {
     remplir_autres(tab, 0, 0);
 
     afficher_tableau(tab);
+    
 
-    int K = 4;
+/*
+    int K = 2;
 
+    efface(tab,K);
+
+    afficher_tableau(tab);
+
+    int** tab_efface = copie_tableau(tab);
+
+
+    //afficher_tableau(tab_efface);
+
+
+    
+    int x;
+    int y;
+    int v;
+
+    int k=0;
+
+    while(k<K){
+
+        printf("Entrez les coordonnées et la valeur à ajouter: ligne,colonne,valeur\n");
+        scanf("%d,%d,%d", &x , &y, &v);
+
+        if ( (v<=0) || (v>9) || (tab_efface[x][y]!=0) ){
+            printf("Saisie invalide\n\n");
+        }
+        else{
+
+            if (tab[x][y]!=0){
+                tab[x][y] = v;
+                afficher_tableau(tab);
+            }
+            else{
+                tab[x][y] = v;
+                afficher_tableau(tab);
+                k++;
+            }
+
+        }
+    }
+
+    int valide = 0;
+    
+    while (valide==0){
+        printf("Voulez-vous vérifier si le sudoku est valide ? \n1 pour Oui \n0 pour Non \n");
+        scanf("%d", &B);
+
+        if (B==1){
+            valide = valide_tableau()
+        }
+
+
+
+
+
+
+
+    }
 
 
     
 
 
     
-
+*/
     
     
     
     
     
     free(tab);
+    //free(tab_efface);
 }
