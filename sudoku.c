@@ -82,41 +82,41 @@ int valide(int** T, int i, int j, int x){
 }
 
 
-int remplir_autres(int** grid, int row, int col)
+int remplir_autres(int** T, int lig, int col)
 {
     int N = 9;
 
-    if (row == N - 1 && col == N)
+    if (lig == N - 1 && col == N)
         return 1;
  
     if (col == N)
     {
-        row++;
+        lig++;
         col = 0;
     }
    
-    if (grid[row][col] > 0)
+    if (T[lig][col] > 0)
     {
-        return remplir_autres(grid, row, col + 1);
+        return remplir_autres(T, lig, col + 1);
     }
 
 
     for (int num = 1; num <= N; num++)
     {
-        if (valide(grid, row, col, num)==1)
+        if (valide(T, lig, col, num)==1)
         {
-            grid[row][col] = num;
+            T[lig][col] = num;
            
-            if (remplir_autres(grid, row, col + 1)==1)
+            if (remplir_autres(T, lig, col + 1)==1)
                 return 1;
         }
-        grid[row][col] = 0;
+        T[lig][col] = 0;
     }
-    
+
     return 0;
 }
 
-
+//void efface(int** T)
 
 
 int main () {
@@ -133,12 +133,12 @@ int main () {
 
 
     remplir_diag(tab);
-
-
     remplir_autres(tab, 0, 0);
 
-
     afficher_tableau(tab);
+
+    int K = 4;
+
 
 
     
