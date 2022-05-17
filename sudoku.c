@@ -193,11 +193,7 @@ int main () {
     remplir_diag(tab);
     remplir_autres(tab, 0, 0);
 
-    afficher_tableau(tab);
-    
-
-
-    int K = 2;
+    int K = 54;
 
     efface(tab,K);
 
