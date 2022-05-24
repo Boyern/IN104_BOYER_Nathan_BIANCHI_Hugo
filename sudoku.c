@@ -240,7 +240,7 @@ int main () {
     while (valide==0){
         
         int verif;
-        printf("Voulez-vous vérifier si le sudoku est valide ? \n1 pour Oui \n0 pour Non \n");
+        printf("Voulez-vous vérifier si le sudoku est valide ? \n\n1 pour Oui \n0 pour Non \n\n");
         scanf("%d", &verif);
 
         if (verif==1){
