@@ -3,9 +3,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define H (30)
-#define W (60)
-#define Nb_fantasmi (5)
+
+ #define H (30)
+ #define W (60)
+ #define Nb_fantasmi (5)
 
 struct coord
 {
@@ -246,7 +247,7 @@ void check_life(struct PacMan* PacMan){
 }
 
 
-int main(){
+int jeu_pacman(){
 
    for (int l=0;l<H;l+=1){
 
@@ -269,7 +270,7 @@ int main(){
 
          printf("Life : %d\nFood : %d\n",Pm.vite,Pm.food);
       }
-      
+
       afficher_area(area);
       clavier(&Pm, tutti_fantasmi);
       move_fantasmas(tutti_fantasmi,area);

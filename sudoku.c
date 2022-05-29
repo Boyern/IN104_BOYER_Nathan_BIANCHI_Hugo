@@ -177,7 +177,7 @@ void efface(int** T, int K){
 
 
 
-int main () {
+int jeu_sudoku () {
 
     srand(time(NULL));
 
@@ -193,7 +193,7 @@ int main () {
     remplir_diag(tab);
     remplir_autres(tab, 0, 0);
 
-    int K = 54;
+    int K = 1;
 
     efface(tab,K);
 

@@ -1,9 +1,0 @@
-Arborescende de type file1 file 2 donne end_file
-
-end_file file1.c file2.c
-    gcc -o end_life file1.c file2.c
-GC : gcc
-
-
-
-cible et dépendances.
